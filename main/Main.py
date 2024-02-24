@@ -31,34 +31,34 @@ def janken():
 
     # andのほうがorよりも優先順位が高いです。
 
-    elif ((player_hand == Hand.ROCK and computer_hand == Hand.PAPER and computer_hand2 == Hand.PAPER) or
-          (player_hand == Hand.PAPER and computer_hand == Hand.SCISSORS and computer_hand2 == Hand.SCISSORS) or
-          (player_hand == Hand.SCISSORS and computer_hand == Hand.ROCK and computer_hand2 == Hand.ROCK)):
+    elif ((player_hand == Hand.PAPER and computer_hand == Hand.SCISSORS and computer_hand2 == Hand.SCISSORS) or
+          (player_hand == Hand.ROCK and computer_hand == Hand.SCISSORS and computer_hand2 == Hand.SCISSORS) or
+          (player_hand == Hand.PAPER and computer_hand == Hand.ROCK and computer_hand2 == Hand.ROCK) or
+          (player_hand == Hand.SCISSORS and computer_hand == Hand.PAPER and computer_hand2 == Hand.PAPER)):
         print("あなたの勝ち!")
-    elif ((player_hand == Hand.ROCK and computer_hand == Hand.SCISSORS and computer_hand2 == Hand.ROCK)):
+    elif ((player_hand == Hand.ROCK and computer_hand == Hand.SCISSORS and computer_hand2 == Hand.ROCK) or
+          (player_hand == Hand.SCISSORS and computer_hand == Hand.ROCK and computer_hand2 == Hand.SCISSORS) or
+          (player_hand == Hand.PAPER and computer_hand == Hand.SCISSORS and computer_hand2 == Hand.PAPER)):
         print("コンピューター1の勝ち")
     elif ((player_hand == Hand.ROCK and computer_hand == Hand.PAPER and computer_hand2 == Hand.SCISSORS) or
           (player_hand == Hand.PAPER and computer_hand == Hand.SCISSORS and computer_hand2 == Hand.ROCK) or
           (player_hand == Hand.SCISSORS and computer_hand == Hand.PAPER and computer_hand2 == Hand.ROCK) or
           (player_hand == Hand.PAPER and computer_hand == Hand.ROCK and computer_hand2 == Hand.SCISSORS) or
-          (player_hand == Hand.PAPER and computer_hand == Hand.PAPER and computer_hand2 == Hand.SCISSORS) or
           (player_hand == Hand.ROCK and computer_hand == Hand.PAPER and computer_hand2 == Hand.ROCK) or
           (player_hand == Hand.ROCK and computer_hand == Hand.ROCK and computer_hand2 == Hand.PAPER) or
           (player_hand == Hand.ROCK and computer_hand == Hand.SCISSORS and computer_hand2 == Hand.PAPER) or
-          (player_hand == Hand.PAPER and computer_hand == Hand.SCISSORS and computer_hand2 == Hand.PAPER) or
-          (player_hand == Hand.PAPER and computer_hand == Hand.ROCK and computer_hand2 == Hand.ROCK) or
           (player_hand == Hand.SCISSORS and computer_hand == Hand.SCISSORS and computer_hand2 == Hand.PAPER) or
           (player_hand == Hand.PAPER and computer_hand == Hand.ROCK and computer_hand2 == Hand.PAPER) or
           (player_hand == Hand.SCISSORS and computer_hand == Hand.SCISSORS and computer_hand2 == Hand.PAPER) or
           (player_hand == Hand.SCISSORS and computer_hand == Hand.PAPER and computer_hand2 == Hand.SCISSORS) or
-          (player_hand == Hand.SCISSORS and computer_hand == Hand.ROCK and computer_hand2 == Hand.SCISSORS) or
-          (player_hand == Hand.SCISSORS and computer_hand == Hand.PAPER and computer_hand2 == Hand.PAPER) or
-          (player_hand == Hand.ROCK and computer_hand == Hand.SCISSORS and computer_hand2 == Hand.SCISSORS) or
           (player_hand == Hand.SCISSORS and computer_hand == Hand.ROCK and computer_hand2 == Hand.PAPER) or
-          (player_hand == Hand.SCISSORS and computer_hand == Hand.SCISSORS and computer_hand2 == Hand.ROCK)):
+          (player_hand == Hand.ROCK and computer_hand == Hand.PAPER and computer_hand2 == Hand.PAPER) or
+          (player_hand == Hand.SCISSORS and computer_hand == Hand.ROCK and computer_hand2 == Hand.ROCK)):
         print("あいこ")
     elif ((player_hand == Hand.PAPER and computer_hand == Hand.PAPER and computer_hand2 == Hand.ROCK) or
-          (player_hand == Hand.ROCK and computer_hand == Hand.ROCK and computer_hand2 == Hand.SCISSORS)):
+          (player_hand == Hand.ROCK and computer_hand == Hand.ROCK and computer_hand2 == Hand.SCISSORS) or
+          (player_hand == Hand.PAPER and computer_hand == Hand.PAPER and computer_hand2 == Hand.SCISSORS) or
+          (player_hand == Hand.SCISSORS and computer_hand == Hand.SCISSORS and computer_hand2 == Hand.ROCK)):
         print("コンピューター2の勝ち")
 
     else:
