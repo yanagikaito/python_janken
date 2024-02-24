@@ -1,4 +1,11 @@
 import random
+from enum import Enum
+
+
+class Hand():
+    ROCK = 0
+    PAPER = 1
+    SCISSORS = 2
 
 
 def janken():
@@ -8,15 +15,15 @@ def janken():
 
     player_hand = int(input("出す手を数値で入力 (0: グー, 1: チョキ, 2: パー) :"))
 
-    if player_hand < 0 or player_hand > 2:
+    if player_hand < Hand.ROCK or player_hand > Hand.SCISSORS:
         return print("0~2の数値を入力してください")
 
-    computer_hand = random.randint(0, 2)
-    computer_hand2 = random.randint(0, 2)
+    computer_hand = random.randint(Hand.ROCK, Hand.SCISSORS)
+    computer_hand2 = random.randint(Hand.ROCK, Hand.SCISSORS)
     janken_choices = ["グー", "チョキ", "パー"]
 
     print("あなたの出した手は " + janken_choices[player_hand])
-    print("コンピュータの出した手は " + janken_choices[computer_hand])
+    print("コンピュータ1の出した手は " + janken_choices[computer_hand])
     print("コンピューター2の出した手は" + janken_choices[computer_hand2])
 
     if player_hand == computer_hand == computer_hand2:
@@ -24,32 +31,34 @@ def janken():
 
     # andのほうがorよりも優先順位が高いです。
 
-    elif ((player_hand == 0 and computer_hand == 1 and computer_hand2 == 1) or
-          (player_hand == 1 and computer_hand == 2 and computer_hand2 == 2) or
-          (player_hand == 2 and computer_hand == 0 and computer_hand2 == 0)):
+    elif ((player_hand == Hand.ROCK and computer_hand == Hand.PAPER and computer_hand2 == Hand.PAPER) or
+          (player_hand == Hand.PAPER and computer_hand == Hand.SCISSORS and computer_hand2 == Hand.SCISSORS) or
+          (player_hand == Hand.SCISSORS and computer_hand == Hand.ROCK and computer_hand2 == Hand.ROCK)):
         print("あなたの勝ち!")
-    elif ((player_hand == 0 and computer_hand == 1 and computer_hand2 == 2) or
-          (player_hand == 1 and computer_hand == 2 and computer_hand2 == 0) or
-          (player_hand == 2 and computer_hand == 1 and computer_hand2 == 0) or
-          (player_hand == 1 and computer_hand == 0 and computer_hand2 == 2) or
-          (player_hand == 1 and computer_hand == 1 and computer_hand2 == 2) or
-          (player_hand == 0 and computer_hand == 1 and computer_hand2 == 0) or
-          (player_hand == 0 and computer_hand == 0 and computer_hand2 == 1) or
-          (player_hand == 0 and computer_hand == 2 and computer_hand2 == 1) or
-          (player_hand == 1 and computer_hand == 2 and computer_hand2 == 1) or
-          (player_hand == 1 and computer_hand == 0 and computer_hand2 == 0) or
-          (player_hand == 2 and computer_hand == 2 and computer_hand2 == 1) or
-          (player_hand == 1 and computer_hand == 0 and computer_hand2 == 1) or
-          (player_hand == 2 and computer_hand == 2 and computer_hand2 == 1) or
-          (player_hand == 2 and computer_hand == 1 and computer_hand2 == 2) or
-          (player_hand == 2 and computer_hand == 0 and computer_hand2 == 2) or
-          (player_hand == 2 and computer_hand == 1 and computer_hand2 == 1) or
-          (player_hand == 0 and computer_hand == 2 and computer_hand2 == 2) or
-          (player_hand == 0 and computer_hand == 2 and computer_hand2 == 0) or
-          (player_hand == 2 and computer_hand == 0 and computer_hand2 == 1) or
-          (player_hand == 2 and computer_hand == 2 and computer_hand2 == 0)):
+    elif ((player_hand == Hand.ROCK and computer_hand == Hand.SCISSORS and computer_hand2 == Hand.ROCK)):
+        print("コンピューター1の勝ち")
+    elif ((player_hand == Hand.ROCK and computer_hand == Hand.PAPER and computer_hand2 == Hand.SCISSORS) or
+          (player_hand == Hand.PAPER and computer_hand == Hand.SCISSORS and computer_hand2 == Hand.ROCK) or
+          (player_hand == Hand.SCISSORS and computer_hand == Hand.PAPER and computer_hand2 == Hand.ROCK) or
+          (player_hand == Hand.PAPER and computer_hand == Hand.ROCK and computer_hand2 == Hand.SCISSORS) or
+          (player_hand == Hand.PAPER and computer_hand == Hand.PAPER and computer_hand2 == Hand.SCISSORS) or
+          (player_hand == Hand.ROCK and computer_hand == Hand.PAPER and computer_hand2 == Hand.ROCK) or
+          (player_hand == Hand.ROCK and computer_hand == Hand.ROCK and computer_hand2 == Hand.PAPER) or
+          (player_hand == Hand.ROCK and computer_hand == Hand.SCISSORS and computer_hand2 == Hand.PAPER) or
+          (player_hand == Hand.PAPER and computer_hand == Hand.SCISSORS and computer_hand2 == Hand.PAPER) or
+          (player_hand == Hand.PAPER and computer_hand == Hand.ROCK and computer_hand2 == Hand.ROCK) or
+          (player_hand == Hand.SCISSORS and computer_hand == Hand.SCISSORS and computer_hand2 == Hand.PAPER) or
+          (player_hand == Hand.PAPER and computer_hand == Hand.ROCK and computer_hand2 == Hand.PAPER) or
+          (player_hand == Hand.SCISSORS and computer_hand == Hand.SCISSORS and computer_hand2 == Hand.PAPER) or
+          (player_hand == Hand.SCISSORS and computer_hand == Hand.PAPER and computer_hand2 == Hand.SCISSORS) or
+          (player_hand == Hand.SCISSORS and computer_hand == Hand.ROCK and computer_hand2 == Hand.SCISSORS) or
+          (player_hand == Hand.SCISSORS and computer_hand == Hand.PAPER and computer_hand2 == Hand.PAPER) or
+          (player_hand == Hand.ROCK and computer_hand == Hand.SCISSORS and computer_hand2 == Hand.SCISSORS) or
+          (player_hand == Hand.SCISSORS and computer_hand == Hand.ROCK and computer_hand2 == Hand.PAPER) or
+          (player_hand == Hand.SCISSORS and computer_hand == Hand.SCISSORS and computer_hand2 == Hand.ROCK)):
         print("あいこ")
-    elif ((player_hand == 1 and computer_hand == 1 and computer_hand2 == 0)):
+    elif ((player_hand == Hand.PAPER and computer_hand == Hand.PAPER and computer_hand2 == Hand.ROCK) or
+          (player_hand == Hand.ROCK and computer_hand == Hand.ROCK and computer_hand2 == Hand.SCISSORS)):
         print("コンピューター2の勝ち")
 
     else:
