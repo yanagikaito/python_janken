@@ -20,8 +20,7 @@ def janken():
     if player_hand == computer_hand == computer_hand2:
         print("あいこ")
     elif ((player_hand == 0 and computer_hand == 1 and computer_hand2 == 1) or (player_hand == 1 and computer_hand == 2
-                                                                                and computer_hand2 == 2) or (
-                  player_hand == 2 and computer_hand == 0 and computer_hand == 0)):
+                            and computer_hand2 == 2) or (player_hand == 2 and computer_hand == 0 and computer_hand == 0)):
         print("あなたの勝ち!")
     elif ((player_hand == 0 and computer_hand == 1 and computer_hand2 == 2) or (
             player_hand == 1 and computer_hand == 2
