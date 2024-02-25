@@ -9,6 +9,18 @@ class Hand():
     SCISSORS = 2
 
 
+class Decision():
+    DRAW = "あいこ"
+    LOSE = "負け"
+    WIN = "勝ち"
+
+
+class Score():
+    PLAYER_DRAW = 0
+    PLAYER_LOSE = 0
+    PLAYER_WIN = 0
+
+
 def janken():
     print("じゃんけんスタート!")
 
@@ -28,7 +40,7 @@ def janken():
     print("コンピューター2の出した手は" + janken_choices[computer_hand2])
     time.sleep(0.9)
     if player_hand == computer_hand == computer_hand2:
-        print("あいこ")
+        print(Decision.DRAW)
 
 
     # andのほうがorよりも優先順位が高いです。
@@ -36,11 +48,11 @@ def janken():
           (player_hand == Hand.ROCK and computer_hand == Hand.SCISSORS and computer_hand2 == Hand.SCISSORS) or
           (player_hand == Hand.PAPER and computer_hand == Hand.ROCK and computer_hand2 == Hand.ROCK) or
           (player_hand == Hand.SCISSORS and computer_hand == Hand.PAPER and computer_hand2 == Hand.PAPER)):
-        print("あなたの勝ち!")
+        print(Decision.WIN)
     elif ((player_hand == Hand.SCISSORS and computer_hand == Hand.ROCK and computer_hand2 == Hand.SCISSORS) or
           (player_hand == Hand.PAPER and computer_hand == Hand.SCISSORS and computer_hand2 == Hand.PAPER) or
           (player_hand == Hand.ROCK and computer_hand == Hand.PAPER and computer_hand2 == Hand.ROCK)):
-        print("コンピューター1の勝ち")
+        print("コンピューター1の" + Decision.WIN)
     elif ((player_hand == Hand.ROCK and computer_hand == Hand.PAPER and computer_hand2 == Hand.SCISSORS) or
           (player_hand == Hand.PAPER and computer_hand == Hand.SCISSORS and computer_hand2 == Hand.ROCK) or
           (player_hand == Hand.SCISSORS and computer_hand == Hand.PAPER and computer_hand2 == Hand.ROCK) or
@@ -55,15 +67,31 @@ def janken():
           (player_hand == Hand.SCISSORS and computer_hand == Hand.ROCK and computer_hand2 == Hand.ROCK) or
           (player_hand == Hand.ROCK and computer_hand == Hand.ROCK and computer_hand2 == Hand.SCISSORS) or
           (player_hand == Hand.ROCK and computer_hand == Hand.SCISSORS and computer_hand2 == Hand.ROCK)):
-        print("あいこ")
+        print(Decision.DRAW)
     elif ((player_hand == Hand.PAPER and computer_hand == Hand.PAPER and computer_hand2 == Hand.ROCK) or
           (player_hand == Hand.PAPER and computer_hand == Hand.PAPER and computer_hand2 == Hand.SCISSORS) or
           (player_hand == Hand.SCISSORS and computer_hand == Hand.SCISSORS and computer_hand2 == Hand.ROCK) or
           (player_hand == Hand.ROCK and computer_hand == Hand.ROCK and computer_hand2 == Hand.PAPER)):
-        print("コンピューター2の勝ち")
+        print("コンピューター2の" + Decision.WIN)
 
     else:
-        print("あなたの負け!")
+        print("あなたの" + Decision.LOSE)
+
+    # 勝敗判定
+    i = (player_hand - computer_hand - computer_hand2) % 3
+    print(i)
+    if i == 0:
+        Score.PLAYER_DRAW += 1
+    elif i == 1:
+        Score.PLAYER_LOSE + 1
+    else:
+        Score.PLAYER_WIN + 1
+        time.sleep(0.9)
+
+    # 出力結果
+    print("{}勝/{}負/{}引き分け".format(Score.PLAYER_WIN, Score.PLAYER_LOSE, Score.PLAYER_DRAW))
+    if Score.PLAYER_WIN == 3:
+        print("「3勝であなたの勝ち}")
 
 
 # じゃんけんゲームを実行
