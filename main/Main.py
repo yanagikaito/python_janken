@@ -1,6 +1,30 @@
+import pygame
 import random
 from enum import Enum
 import time
+import sys
+
+# 初期化
+pygame.init()
+
+# ウィンドウのサイズ
+WIDTH = 800
+HEGHT = 600
+WIN = pygame.display.set_mode((WIDTH, HEGHT))
+
+# タイトル
+pygame.display.set_caption("じゃんけんゲーム")
+
+# 色
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+
+
+# メイン関数
+def main():
+    clock = pygame.time.Clock()
+    run = True
+
 
 print("じゃんけんスタート")
 print("先に3勝した方が勝ち")
@@ -49,20 +73,15 @@ def janken():
         print("コンピュータ1の出した手は " + janken_choices[computer_hand])
         print("コンピューター2の出した手は" + janken_choices[computer_hand2])
         time.sleep(0.9)
-        # チョキ,チョキ,パーであいこになる原因は53行目と54行目にある
-        if player_hand == computer_hand == computer_hand2:
-            print(Decision.DRAW)
-
 
         # andのほうがorよりも優先順位が高いです。
-        elif ((player_hand == Hand.ROCK and computer_hand == Hand.SCISSORS and computer_hand2 == Hand.SCISSORS) or
-              (player_hand == Hand.PAPER and computer_hand == Hand.ROCK and computer_hand2 == Hand.ROCK) or
-              (player_hand == Hand.SCISSORS and computer_hand == Hand.PAPER and computer_hand2 == Hand.PAPER)):
+        if ((player_hand == Hand.ROCK and computer_hand == Hand.SCISSORS and computer_hand2 == Hand.SCISSORS) or
+                (player_hand == Hand.PAPER and computer_hand == Hand.ROCK and computer_hand2 == Hand.ROCK) or
+                (player_hand == Hand.SCISSORS and computer_hand == Hand.PAPER and computer_hand2 == Hand.PAPER)):
             # デバッグ
             print(Decision.WIN)
         elif ((player_hand == Hand.SCISSORS and computer_hand == Hand.ROCK and computer_hand2 == Hand.SCISSORS) or
-              (player_hand == Hand.PAPER and computer_hand == Hand.SCISSORS and computer_hand2 == Hand.PAPER) or
-              (player_hand == Hand.ROCK and computer_hand == Hand.PAPER and computer_hand2 == Hand.ROCK)):
+              (player_hand == Hand.PAPER and computer_hand == Hand.SCISSORS and computer_hand2 == Hand.PAPER)):
             # デバッグ
             print("コンピューター1の" + Decision.WIN)
         elif ((player_hand == Hand.ROCK and computer_hand == Hand.PAPER and computer_hand2 == Hand.SCISSORS) or
@@ -79,7 +98,8 @@ def janken():
               (player_hand == Hand.ROCK and computer_hand == Hand.PAPER and computer_hand2 == Hand.PAPER) or
               (player_hand == Hand.SCISSORS and computer_hand == Hand.ROCK and computer_hand2 == Hand.ROCK) or
               (player_hand == Hand.ROCK and computer_hand == Hand.ROCK and computer_hand2 == Hand.SCISSORS) or
-              (player_hand == Hand.ROCK and computer_hand == Hand.SCISSORS and computer_hand2 == Hand.ROCK)):
+              (player_hand == Hand.ROCK and computer_hand == Hand.SCISSORS and computer_hand2 == Hand.ROCK) or
+              (player_hand == Hand.ROCK and computer_hand == Hand.PAPER and computer_hand2 == Hand.ROCK)):
             # デバッグ
             print(Decision.DRAW)
         elif ((player_hand == Hand.PAPER and computer_hand == Hand.PAPER and computer_hand2 == Hand.ROCK) or
@@ -154,3 +174,7 @@ def janken():
 
 # じゃんけんゲームを実行
 janken()
+
+# スペースがない場合、その言語は単語として解析されず、1 つの単語の一部として解析されます。
+if __name__ == '__main__':
+    main()
