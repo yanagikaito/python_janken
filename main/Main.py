@@ -7,10 +7,10 @@ import sys
 # 初期化
 pygame.init()
 
-# ウィンドウのサイズ
+# パネルのサイズ
 WIDTH = 800
 HEGHT = 600
-WIN = pygame.display.set_mode((WIDTH, HEGHT))
+screen = pygame.display.set_mode((WIDTH, HEGHT))
 
 # タイトル
 pygame.display.set_caption("じゃんけんゲーム")
@@ -25,6 +25,25 @@ def main():
     clock = pygame.time.Clock()
     run = True
 
+
+# フォント作成
+# "msgothic"を指定してあげると日本語表示されるようになる
+sysfont = pygame.font.SysFont("msgothic", 80)
+
+# テキストを描画したウィンドウを作成
+game_start = sysfont.render("じゃんけんスタート", False, (0, 0, 0))
+
+while True:
+    screen.fill((0, 0, 255))
+
+    # テキストを描画する
+    screen.blit(game_start, (20, 50))
+
+    pygame.display.update()
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            sys.exit()
 
 print("じゃんけんスタート")
 print("先に3勝した方が勝ち")
