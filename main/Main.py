@@ -28,16 +28,18 @@ def main():
 
 # フォント作成
 # "msgothic"を指定してあげると日本語表示されるようになる
-sysfont = pygame.font.SysFont("msgothic", 80)
+sysfont = pygame.font.SysFont("msgothic", 60)
 
 # テキストを描画したウィンドウを作成
 game_start = sysfont.render("じゃんけんスタート", False, (0, 0, 0))
+game_win = sysfont.render("先に3勝した方が勝ち", True, (0, 0, 0))
 
 while True:
     screen.fill((0, 0, 255))
 
     # テキストを描画する
     screen.blit(game_start, (20, 50))
+    screen.blit(game_win, (20, 150))
 
     pygame.display.update()
 
