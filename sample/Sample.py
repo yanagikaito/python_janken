@@ -5,6 +5,23 @@ m = 2
 i = (p - m) % 3
 print(i)
 
+n = int(input('ピラミッドの段数を入力してください'))
+for j in range(1, n + 1):
+    print(' ' * (n - j) + '*' * (2 * j - 1))
+print("---------------------------------")
+
+print("砂時計の形を表示")
+
+
+def sandclock(size):
+    for i in range(size, 0, -1):
+        print(" " * (size - i) + "*" * (2 * i - 1))
+    for i in range(2, size + 1):
+        print(" " * (size - i) + "*" * (2 * i - 1))
+
+
+sandclock(5)
+
 # pygameインストールされているかテスト
 import pygame
 
