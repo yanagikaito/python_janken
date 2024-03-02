@@ -14,7 +14,11 @@ print("砂時計の形を表示")
 
 
 def sandclock(size):
+    # range(start, stop, step): startから始まり、stopの値まで（stopは含まず）
+    # stepずつ増減するシーケンスを生成します。
     for i in range(size, 0, -1):
+        # (size - i) 空白
+        # (2 * i - 1) *の数
         print(" " * (size - i) + "*" * (2 * i - 1))
     for i in range(2, size + 1):
         print(" " * (size - i) + "*" * (2 * i - 1))
