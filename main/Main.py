@@ -3,13 +3,14 @@ import random
 from enum import Enum
 import time
 import sys
+from pygame.locals import *
 
 # 初期化
 pygame.init()
 
 # パネルのサイズ
-WIDTH = 800
-HEGHT = 600
+WIDTH = 1200
+HEGHT = 990
 screen = pygame.display.set_mode((WIDTH, HEGHT))
 
 # タイトル
@@ -28,24 +29,35 @@ def main():
 
 # フォント作成
 # "msgothic"を指定してあげると日本語表示されるようになる
-sysfont = pygame.font.SysFont("msgothic", 60)
+sysfont = pygame.font.SysFont("msgothic", 45)
 
 # テキストを描画したウィンドウを作成
 game_start = sysfont.render("じゃんけんスタート", False, (0, 0, 0))
 game_win = sysfont.render("先に3勝した方が勝ち", True, (0, 0, 0))
+player_hand = sysfont.render("出す手を数値で入力 ""(0: グー, 1: チョキ, 2: パー) :", True, (0, 0, 0))
 
 while True:
     screen.fill((0, 0, 255))
 
     # テキストを描画する
-    screen.blit(game_start, (20, 50))
-    screen.blit(game_win, (20, 150))
-
-    pygame.display.update()
+    screen.blit(game_start, (15, 60))
+    screen.blit(game_win, (15, 150))
+    screen.blit(player_hand, (15, 220))
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            sys.exit()
+            # ウィンドウが閉じられたらループを終了する
+            run = False
+        # キーを押したとき
+        elif event.type == pygame.KEYDOWN:
+            # ESCキーならスクリプトを終了
+            if event.key == K_ESCAPE:
+                pygame.quit()
+                sys.exit()
+
+            else:
+                print("押されたキー = " + pygame.key.name(event.key))
+    pygame.display.update()
 
 print("じゃんけんスタート")
 print("先に3勝した方が勝ち")
