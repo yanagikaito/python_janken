@@ -1,8 +1,5 @@
 import pygame
 import random
-from enum import Enum
-import time
-import sys
 from pygame.locals import *
 
 # 初期化
@@ -10,8 +7,8 @@ pygame.init()
 
 # パネルのサイズ
 WIDTH = 1200
-HEGHT = 990
-screen = pygame.display.set_mode((WIDTH, HEGHT))
+HEIGHT = 990
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
 # タイトル
 pygame.display.set_caption("じゃんけんゲーム")
@@ -26,38 +23,53 @@ def main():
     clock = pygame.time.Clock()
     run = True
 
+    # フォント作成
+    # "msgothic"を指定してあげると日本語表示されるようになる
+    sysfont = pygame.font.SysFont("msgothic", 45)
 
-# フォント作成
-# "msgothic"を指定してあげると日本語表示されるようになる
-sysfont = pygame.font.SysFont("msgothic", 45)
+    # テキストを描画したウィンドウを作成
+    game_start = sysfont.render("じゃんけんスタート", False, (0, 0, 0))
+    game_win = sysfont.render("先に3勝した方が勝ち", True, (0, 0, 0))
+    player_hand = sysfont.render("出す手を数値で入力 (0: グー, 1: チョキ, 2: パー)", True, (0, 0, 0))
 
-# テキストを描画したウィンドウを作成
-game_start = sysfont.render("じゃんけんスタート", False, (0, 0, 0))
-game_win = sysfont.render("先に3勝した方が勝ち", True, (0, 0, 0))
-player_hand = sysfont.render("出す手を数値で入力 ""(0: グー, 1: チョキ, 2: パー) :", True, (0, 0, 0))
+    player_hand_value = None
+    player_hand_text = None
 
-while True:
-    screen.fill((0, 0, 255))
+    while run:
+        screen.fill((0, 0, 255))
 
-    # テキストを描画する
-    screen.blit(game_start, (15, 60))
-    screen.blit(game_win, (15, 150))
-    screen.blit(player_hand, (15, 220))
+        # テキストを描画する
+        screen.blit(game_start, (15, 60))
+        screen.blit(game_win, (15, 150))
+        screen.blit(player_hand, (15, 200))
 
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            # ウィンドウが閉じられたらループを終了する
-            run = False
-        # キーを押したとき
-        elif event.type == pygame.KEYDOWN:
-            # ESCキーならスクリプトを終了
-            if event.key == K_ESCAPE:
-                pygame.quit()
-                sys.exit()
+        # 入力されたじゃんけんの数字を描画する
+        if player_hand_text:
+            screen.blit(player_hand_text, (15, 250))
 
-            else:
-                print("押されたキー = " + pygame.key.name(event.key))
-    pygame.display.update()
+        pygame.display.flip()
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                # ウィンドウが閉じられたらループを終了する
+                run = False
+            # キーを押したとき
+            elif event.type == pygame.KEYDOWN:
+                # ESCキーならスクリプトを終了
+                if event.key == K_ESCAPE:
+                    pygame.quit()
+                    run = False
+                # エンターキーなら入力されたじゃんけんの数字を表示する
+                elif event.key == K_RETURN:
+                    if player_hand_value is not None:
+                        player_hand_text = sysfont.render("選択した数字: " + str(player_hand_value), True, (0, 0, 0))
+                # 数字キーならじゃんけんの数字を受け取る
+                elif event.key in [K_0, K_1, K_2]:
+                    player_hand_value = int(pygame.key.name(event.key))
+
+
+# ゲームを実行
+main()
 
 print("じゃんけんスタート")
 print("先に3勝した方が勝ち")
